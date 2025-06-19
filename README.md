@@ -22,8 +22,17 @@ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 
 ## Usage
 
+to get the config
+
 ```bash
-rails generate utility_palettes
+rails generate utility_palettes:config
+```
+
+to generate the palettes
+
+```bash
+rails generate utility_palettes:config
+rails generate utility_palettes:generate
 ```
 
 ## Development
@@ -34,7 +43,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/utility_palettes_rails. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/utility_palettes_rails/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at <https://github.com/[USERNAME]/utility_palettes_rails>. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/utility_palettes_rails/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 

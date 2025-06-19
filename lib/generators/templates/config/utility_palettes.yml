@@ -1,0 +1,41 @@
+shared:
+  utility_palettes:
+    defaults: 
+      absolutes: true
+      relatives: true
+      singles: true
+    output:
+      dated: false
+      files: 'json, scss'
+      format: 'hex'
+      prefix: ''
+      suffix: ''
+    steps:
+      h: 0
+      s: 3
+      l: 8
+    absolutes:
+      teal: '#2cb1bc'
+      orange: '#e35f00'
+      green: '#28b840'
+      purple: '#4f3bbf'
+    relatives:
+      primary-brand: '$green'
+      secondary-brand: '$purple'
+      tertiary-brand: '$orange'
+      primary: '$primary-brand'
+      secondary: '$secondary-brand'
+      tertiary: '$tertiary-brand'
+      success: '$green'
+      information: '#2cb1bc'
+    singles:
+      grey-50: '#fafafa'
+      grey-100: '#f5f5f5'
+      grey-200: '#e5e5e5'
+      grey-300: '#d4d4d4'
+      grey-400: '#a3a3a3'
+      grey-500: '#737373'
+      grey-600: '#525252'
+      grey-700: '#404040'
+      grey-800: '#262626'
+      grey-900: '#171717'
