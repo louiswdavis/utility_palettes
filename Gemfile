@@ -10,5 +10,3 @@ gem 'rake', '~> 13.0'
 gem 'rspec-rails'
 gem 'capybara'
 gem 'byebug'
-
-gem 'color_conversion', '~> 0.1.2'
