@@ -6,7 +6,7 @@ shared:
       singles: true
     output:
       dated: false
-      files: 'json, scss'
+      files: 'json, scss, css'
       format: 'hex'
       prefix: ''
       suffix: ''

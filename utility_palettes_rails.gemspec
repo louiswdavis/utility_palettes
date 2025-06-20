@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   # spec.require_paths = ["lib"]
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+    Dir["{lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
   # Uncomment to register a new dependency of your gem

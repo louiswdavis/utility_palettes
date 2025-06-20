@@ -1,5 +1,3 @@
-require "rails/generators"
-
 module UtilityPalettes
   module Generators
     class ConfigGenerator < Rails::Generators::Base
