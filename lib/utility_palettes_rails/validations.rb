@@ -2,11 +2,11 @@ module UtilityPalettesRails
   class Validations
     def self.validate_config(config)
       if config.dig(:method) != nil && !config.dig(:method).to_s.in?(['hsl'])
-        STDERR.puts "ERROR: The color sequence method you have submitted to Utility Palettes < #{config.dig(:steps)} > is not available ('hsl')"
+        STDERR.puts "ERROR: The colour sequence method you have submitted to Utility Palettes < #{config.dig(:steps)} > is not available ('hsl')"
       end
 
       if config.dig(:steps) != nil && !config.dig(:steps).is_a?(Hash)
-        STDERR.puts "ERROR: The color sequence steps you have submitted to Utility Palettes < #{config.dig(:steps)} > have not been formatted as a map"
+        STDERR.puts "ERROR: The colour sequence steps you have submitted to Utility Palettes < #{config.dig(:steps)} > have not been formatted as a map"
       end
     
       if config.dig(:absolutes) != nil && !config.dig(:absolutes).is_a?(Hash)
