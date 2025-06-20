@@ -170,7 +170,6 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
-  color_conversion (~> 0.1.2)
   rake (~> 13.0)
   rspec-rails
   utility_palettes_rails!
