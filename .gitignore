@@ -7,5 +7,10 @@
 /spec/reports/
 /tmp/
 
+*.gem
+
+# Ignore Byebug command history file.
+.byebug_history
+
 # rspec failure tracking
 .rspec_status
