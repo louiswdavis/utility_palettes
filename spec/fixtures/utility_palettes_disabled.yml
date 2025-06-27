@@ -1,0 +1,14 @@
+test:
+  utility_palettes:
+    defaults:
+      absolutes: true
+    output:
+      dated: false
+    absolutes:
+      teal: '#2cb1bc'
+      orange: '#e35f00'
+    relatives:
+      primary-brand: '#28b840'
+    singles:
+      grey: '#fafafa'
+    disabled: true

@@ -1,0 +1,21 @@
+{
+  "test": {
+    "utility_palettes": {
+      "defaults": {
+        "singles": true
+      },
+      "output": {
+        "format": "hex"
+      },
+      "absolutes": {
+        "purple": "#4f3bbf"
+      },
+      "relatives": {
+        "information": "#2cb1bc"
+      },
+      "singles": {
+        "grey-900": "#171717"
+      }
+    }
+  }
+}

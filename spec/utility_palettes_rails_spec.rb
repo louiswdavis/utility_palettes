@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe UtilityPalettesRails do
-  it "has a version number" do
-    expect(UtilityPalettesRails::VERSION).not_to be nil
-  end
+require 'spec_helper'
 
-  it "does something useful" do
-    expect(false).to eq(true)
+RSpec.describe UtilityPalettesRails do
+  it 'has a version number' do
+    expect(UtilityPalettesRails::VERSION).not_to be nil
   end
 end
