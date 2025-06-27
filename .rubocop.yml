@@ -52,3 +52,5 @@ Style/SingleArgumentDig:
   Enabled: false
 Style/SymbolArray:
   Enabled: false
+Style/WordArray:
+  Enabled: false
