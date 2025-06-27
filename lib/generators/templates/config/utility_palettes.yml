@@ -1,6 +1,6 @@
-shared:
+development:
   utility_palettes:
-    defaults: 
+    defaults:
       absolutes: true
       relatives: true
       singles: true
