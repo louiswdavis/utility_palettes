@@ -1,18 +1,25 @@
+# frozen_string_literal: true
+
 module UtilityPalettesRails
   class Configuration
     def self.setup(config)
       # default increment steps
-      h_step = 2
-      s_step = 2
-      l_step = 9
+      default_increments = UtilityPalettesRails::Configuration.defaults
 
-      config_steps = config.dig(:steps)
+      user_increments = config.dig(:steps) || {}
 
-      h_step = config_steps.dig(:h) if config_steps.dig(:h) != nil
-      s_step = config_steps.dig(:s) if config_steps.dig(:s) != nil
-      l_step = config_steps.dig(:l) if config_steps.dig(:l) != nil
+      h_step = user_increments.dig(:h) || default_increments.dig('hsl', :h)
+      s_step = user_increments.dig(:s) || default_increments.dig('hsl', :s)
+      l_step = user_increments.dig(:l) || default_increments.dig('hsl', :l)
 
       { h_step: h_step, s_step: s_step, l_step: l_step }
+    end
+
+    def self.defaults
+      {
+        'rgb' => { r: '7%', g: '7%', b: '7%' },
+        'hsl' => { h: 0, s: 2, l: 9 }
+      }
     end
   end
 end
