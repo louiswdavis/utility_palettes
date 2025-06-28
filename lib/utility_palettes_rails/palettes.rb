@@ -24,9 +24,11 @@ module UtilityPalettesRails
 
       puts 'Retrieved user palettes...'
 
+      # merging should mean any user colours will overwrite default colours with the same key names
       combined_absolutes = default_absolutes.merge(user_absolutes)
       combined_relatives = default_relatives.merge(user_relatives)
       combined_singles = {}.merge(default_absolutes, user_absolutes, default_singles, user_singles)
+
       @combined_samples = combined_absolutes.merge(combined_relatives).merge(combined_singles)
 
       puts 'Merged palettes...'
