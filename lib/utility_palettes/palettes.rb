@@ -12,9 +12,9 @@ module UtilityPalettes
 
       puts 'Retrieved configuration...'
 
-      default_absolutes = @config.dig(:defaults, :absolutes) == false ? [] : UtilityPalettes::Defaults.absolutes
-      default_relatives = @config.dig(:defaults, :relatives) == false ? [] : UtilityPalettes::Defaults.relatives
-      default_singles = @config.dig(:defaults, :singles) == false ? [] : UtilityPalettes::Defaults.singles
+      default_absolutes = @config.dig(:defaults, :absolutes) == false ? {} : UtilityPalettes::Defaults.absolutes
+      default_relatives = @config.dig(:defaults, :relatives) == false ? {} : UtilityPalettes::Defaults.relatives
+      default_singles = @config.dig(:defaults, :singles) == false ? {} : UtilityPalettes::Defaults.singles
 
       puts 'Defined default palettes...'
 
