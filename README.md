@@ -96,9 +96,11 @@ Here you would define colour names and values that you would like copied directl
 
 Things that will hopefully be added in future development:
 
+- Finishing the overall palette spec file
 - Different colour model and space methods for adapting colours, and the steps to go with them
 - Add more defaults such as different Tailwind version colours
 - Have a view that can be copied to apps to allow users the ability to quickly review the colours generated
+- Finish the '$' copy functionality to use colours defined in the config for other colours later in the generation process
 
 ## Development
 

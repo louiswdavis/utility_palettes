@@ -21,13 +21,7 @@ development:
       green: '#28b840'
       purple: '#4f3bbf'
     relatives:
-      primary-brand: '$green'
-      secondary-brand: '$purple'
-      tertiary-brand: '$orange'
-      primary: '$primary-brand'
-      secondary: '$secondary-brand'
-      tertiary: '$tertiary-brand'
-      success: '$green'
+      success: '#28b840'
       information: '#2cb1bc'
     singles:
       grey-50: '#fafafa'

@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 
+# TODO
+
 RSpec.describe UtilityPalettesRails::Palettes do
   context 'methods' do
     it 'generate' do

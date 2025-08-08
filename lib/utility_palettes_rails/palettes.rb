@@ -83,6 +83,7 @@ module UtilityPalettesRails
             colourized_hash[label] = ColorConverters::Color.new(colour)
           end
 
+          # TODO
           # provide a name if the label is left blank
           # if label.to_s == '$blank'
           #   hash[colourized_hash[label].name] = hash.delete(label)
