@@ -10,6 +10,7 @@ development:
       format: 'hex'
       prefix: ''
       suffix: ''
+    method: 'hsl'
     steps:
       h: 0
       s: 3

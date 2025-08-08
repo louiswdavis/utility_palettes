@@ -94,6 +94,7 @@ module UtilityPalettesRails
       when 'hsl'
         UtilityPalettesRails::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
       when 'rgb'
+        # TODO
       else
         UtilityPalettesRails::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
       end
