@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    utility_palettes (0.1.0)
+    utility_palettes (0.1.1)
       color_converters (~> 0.1.2)
 
 GEM
