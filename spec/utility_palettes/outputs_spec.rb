@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'json'
 
-RSpec.describe UtilityPalettesRails::Outputs do
+RSpec.describe UtilityPalettes::Outputs do
   context 'methods' do
     before do
       @generated_palettes = [['colour-50', ColorConverters::Color.new('#123456')]]

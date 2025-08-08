@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe UtilityPalettesRails::Sequences do
+RSpec.describe UtilityPalettes::Sequences do
   context 'methods' do
     it '.hsl' do
       colour = ColorConverters::Color.new(h: 27, s: 34, l: 48)

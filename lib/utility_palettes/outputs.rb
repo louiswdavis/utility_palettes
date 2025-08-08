@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Outputs
     def self.generate(generated_palettes, config)
       output_format = config.dig(:output, :format).to_s.downcase.presence

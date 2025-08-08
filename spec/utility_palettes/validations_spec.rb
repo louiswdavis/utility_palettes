@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe UtilityPalettesRails::Validations do
+RSpec.describe UtilityPalettes::Validations do
   context 'methods' do
     it '.validate_config' do
       expect(described_class.validate_config({})).to eq true

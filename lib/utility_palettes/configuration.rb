@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Configuration
     def self.setup(config)
       # default increment steps
-      default_increments = UtilityPalettesRails::Configuration.defaults
+      default_increments = UtilityPalettes::Configuration.defaults
 
       user_increments = config.dig(:steps) || {}
 

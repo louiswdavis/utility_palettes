@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe UtilityPalettesRails::Defaults do
+RSpec.describe UtilityPalettes::Defaults do
   context 'methods' do
     it 'absolutes' do
       expect(described_class.absolutes).to eq(

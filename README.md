@@ -1,8 +1,6 @@
-# UtilityPalettesRails
+# UtilityPalettes
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/utility_palettes_rails`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/utility_palettes`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 > Generate your own colour palettes in an instance.
 
@@ -26,7 +24,7 @@ gem install utility_palettes
 
 ## Usage
 
-to get the config
+To get the config full of
 
 ```bash
 rails generate utility_palettes:config
@@ -64,6 +62,8 @@ How the output file and values should be written:
 | prefix  | A string that is appended to the start of all colour names, i.e. 'tw-'                  | ''      | <any string>                                            |
 | suffix  | A string that is appended to the end of all colour names, i.e. '-col'                   | ''      | <any string>                                            |
 
+The JSON output file will appear at the top-level of your project, while SCSS and CSS are defined to go to `app/assets/stylesheets`.
+
 ### Method (WIP)
 
 It allos you to determine how you want the colours to be adjusted to create the variance in your palette, but for now all colour adjustments are made by changing the HSL values as it is the best combination of the simple yet effective and accurate method available.
@@ -82,11 +82,12 @@ In the future you will be able to shift the colours by changing values for diffe
 
 ### Absolutes
 
-Here you would define colour names and values that you would like to create an "absolute palette" for.
+Here you would define colour names and values that you would like to create an "absolute palette"; where for each colour given, a range of colours are output with -50, -100, ..., -900 suffixes using that colour as the base.
 
 ### Relatives
 
-Here you would define colour names and values that you would like to create an "relative palette" for.
+Here you would define colour names and values that you would like to create an "relative palette"; where for each colour given, a -light and -dark colour are generated one step up and down from the base colour.
+If a colour is included in both the "absolutes" and "relatives" sections, then the -light and -dark colours will match with colours in the absolute palette.
 
 ### Singles
 
@@ -97,6 +98,7 @@ Here you would define colour names and values that you would like copied directl
 Things that will hopefully be added in future development:
 
 - Finishing the overall palette spec file
+- Migrate off the reliance of Rails Generators
 - Different colour model and space methods for adapting colours, and the steps to go with them
 - Add more defaults such as different Tailwind version colours
 - Have a view that can be copied to apps to allow users the ability to quickly review the colours generated
@@ -110,7 +112,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at <https://github.com/louiswdavis/utility_palettes_rails>. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/louiswdavis/utility_palettes_rails/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at <https://github.com/louiswdavis/utility_palettes>. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/louiswdavis/utility_palettes/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -118,4 +120,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the UtilityPalettesRails project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/louiswdavis/utility_palettes_rails/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the UtilityPalettes project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/louiswdavis/utility_palettes/blob/master/CODE_OF_CONDUCT.md).

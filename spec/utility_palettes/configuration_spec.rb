@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe UtilityPalettesRails::Configuration do
+RSpec.describe UtilityPalettes::Configuration do
   context 'methods' do
     it 'setup' do
       expect(described_class.setup({})).to eq({ h_step: 0, s_step: 2, l_step: 9 })

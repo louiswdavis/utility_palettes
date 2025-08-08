@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe UtilityPalettesRails do
+RSpec.describe UtilityPalettes do
   it 'has a version number' do
-    expect(UtilityPalettesRails::VERSION).not_to be nil
+    expect(UtilityPalettes::VERSION).not_to be nil
   end
 end

@@ -28,7 +28,7 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
     allow(Rails.application).to receive(:config_for).and_return(nil)
 
     # Stub the actual generation call so we don't try to run it
-    allow(UtilityPalettesRails::Palettes).to receive(:generate)
+    allow(UtilityPalettes::Palettes).to receive(:generate)
     allow(described_class).to receive(:disabled_warn).and_call_original
     allow(described_class).to receive(:config_format_warn).and_call_original
   end
@@ -49,8 +49,8 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
 
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).to have_received(:generate).once
-      expect(UtilityPalettesRails::Palettes).to have_received(:generate).with(expected_config)
+      expect(UtilityPalettes::Palettes).to have_received(:generate).once
+      expect(UtilityPalettes::Palettes).to have_received(:generate).with(expected_config)
       expect(described_class).not_to have_received(:disabled_warn)
       expect(described_class).not_to have_received(:config_format_warn)
     end
@@ -65,7 +65,7 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
 
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).not_to have_received(:generate)
+      expect(UtilityPalettes::Palettes).not_to have_received(:generate)
       expect(described_class).to have_received(:disabled_warn).once
       expect(described_class).not_to have_received(:config_format_warn)
     end
@@ -76,7 +76,7 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
 
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).not_to have_received(:generate)
+      expect(UtilityPalettes::Palettes).not_to have_received(:generate)
       expect(described_class).not_to have_received(:disabled_warn)
       expect(described_class).to have_received(:config_format_warn).once
     end
@@ -97,8 +97,8 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
 
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).to have_received(:generate).once
-      expect(UtilityPalettesRails::Palettes).to have_received(:generate).with(expected_config)
+      expect(UtilityPalettes::Palettes).to have_received(:generate).once
+      expect(UtilityPalettes::Palettes).to have_received(:generate).with(expected_config)
       expect(described_class).not_to have_received(:disabled_warn)
       expect(described_class).not_to have_received(:config_format_warn)
     end
@@ -113,7 +113,7 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
 
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).not_to have_received(:generate)
+      expect(UtilityPalettes::Palettes).not_to have_received(:generate)
       expect(described_class).to have_received(:disabled_warn).once
       expect(described_class).not_to have_received(:config_format_warn)
     end
@@ -124,7 +124,7 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
 
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).not_to have_received(:generate)
+      expect(UtilityPalettes::Palettes).not_to have_received(:generate)
       expect(described_class).not_to have_received(:disabled_warn)
       expect(described_class).to have_received(:config_format_warn).once
     end
@@ -134,7 +134,7 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
     it 'and calls generate' do
       run_generator
 
-      expect(UtilityPalettesRails::Palettes).to have_received(:generate).once.with({})
+      expect(UtilityPalettes::Palettes).to have_received(:generate).once.with({})
       expect(described_class).not_to have_received(:disabled_warn)
       expect(described_class).not_to have_received(:config_format_warn)
     end

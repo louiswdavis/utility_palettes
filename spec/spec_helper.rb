@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'utility_palettes_rails'
+require 'utility_palettes'
 require 'color_converters'
 require 'byebug'
 

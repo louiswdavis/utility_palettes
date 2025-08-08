@@ -17,7 +17,7 @@ module UtilityPalettes
         elsif config.dig('disabled') == true
           self.class.disabled_warn
         else
-          UtilityPalettesRails::Palettes.generate(config)
+          UtilityPalettes::Palettes.generate(config)
         end
       end
 

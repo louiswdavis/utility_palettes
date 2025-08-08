@@ -4,7 +4,7 @@ require 'spec_helper'
 
 # TODO
 
-RSpec.describe UtilityPalettesRails::Palettes do
+RSpec.describe UtilityPalettes::Palettes do
   context 'methods' do
     it 'generate' do
       expect(described_class.generate({})).to eq true

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Defaults
     def self.absolutes
       {

@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Palettes
     def self.generate(config)
       @config = config
 
       puts 'Generating utility palettes...'
 
-      UtilityPalettesRails::Validations.validate_config(@config)
-      @increment_steppers = UtilityPalettesRails::Configuration.setup(@config)
+      UtilityPalettes::Validations.validate_config(@config)
+      @increment_steppers = UtilityPalettes::Configuration.setup(@config)
 
       puts 'Retrieved configuration...'
 
-      default_absolutes = @config.dig(:defaults, :absolutes) == false ? [] : UtilityPalettesRails::Defaults.absolutes
-      default_relatives = @config.dig(:defaults, :relatives) == false ? [] : UtilityPalettesRails::Defaults.relatives
-      default_singles = @config.dig(:defaults, :singles) == false ? [] : UtilityPalettesRails::Defaults.singles
+      default_absolutes = @config.dig(:defaults, :absolutes) == false ? [] : UtilityPalettes::Defaults.absolutes
+      default_relatives = @config.dig(:defaults, :relatives) == false ? [] : UtilityPalettes::Defaults.relatives
+      default_singles = @config.dig(:defaults, :singles) == false ? [] : UtilityPalettes::Defaults.singles
 
       puts 'Defined default palettes...'
 
@@ -47,7 +47,7 @@ module UtilityPalettesRails
 
       generated_palettes = {}.merge(generated_absolutes, generated_relatives, generated_singles)
       generated_palettes = self.format_palette(generated_palettes)
-      output_palettes = UtilityPalettesRails::Outputs.generate(generated_palettes, @config)
+      output_palettes = UtilityPalettes::Outputs.generate(generated_palettes, @config)
 
       filename = 'utility_palettes'
       filename += "-#{Time.zone.now.strftime('%Y%m%d-%H%M%S')}" if @config.dig(:output, :dated) == true
@@ -55,15 +55,15 @@ module UtilityPalettesRails
       output_files = (@config.dig(:output, :files) || '').split(',').map(&:strip)
 
       file = nil
-      file = UtilityPalettesRails::Outputs.json(filename, output_palettes) if output_files.blank? || output_files.include?('json')
+      file = UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.blank? || output_files.include?('json')
       File.rename(file.path, "#{filename}.json") if file.present?
       
       file = nil
-      file = UtilityPalettesRails::Outputs.scss(filename, output_palettes) if output_files.include?('scss')
+      file = UtilityPalettes::Outputs.scss(filename, output_palettes) if output_files.include?('scss')
       File.rename(file.path, "app/assets/stylesheets/#{filename}.scss") if file.present?
 
       file = nil
-      file = UtilityPalettesRails::Outputs.css(filename, output_palettes) if output_files.include?('css')
+      file = UtilityPalettes::Outputs.css(filename, output_palettes) if output_files.include?('css')
       File.rename(file.path, "app/assets/stylesheets/#{filename}.css") if file.present?
 
       true
@@ -108,9 +108,9 @@ module UtilityPalettesRails
       colour_map.each do |label, base_colour|
         # create a palette for a single colour from the providing mapping
         if method == 'absolutes'
-          generated_swatches = UtilityPalettesRails::Swatch.absolute_generator(label, base_colour, @config.dig(:method), @increment_steppers)
+          generated_swatches = UtilityPalettes::Swatch.absolute_generator(label, base_colour, @config.dig(:method), @increment_steppers)
         elsif method == 'relatives'
-          generated_swatches = UtilityPalettesRails::Swatch.relative_generator(label, base_colour, @config.dig(:method), @increment_steppers)
+          generated_swatches = UtilityPalettes::Swatch.relative_generator(label, base_colour, @config.dig(:method), @increment_steppers)
         end
 
         # merge the colours absolute palette into the collective mapping

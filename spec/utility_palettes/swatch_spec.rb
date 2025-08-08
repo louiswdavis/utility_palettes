@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe UtilityPalettesRails::Swatch do
+RSpec.describe UtilityPalettes::Swatch do
   context 'methods' do
     it '.absolute_generator' do
       colour = ColorConverters::Color.new(h: 27, s: 34, l: 48)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Validations
     def self.validate_config(config)
       sequence_options = ['hsl']

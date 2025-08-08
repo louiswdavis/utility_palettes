@@ -5,7 +5,7 @@ require 'bigdecimal'
 
 # an increase in the 'level' makes the percieved colour darker
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Sequences
     def self.hsl(colour, level_change, increment_steppers)
       h_step = increment_steppers[:h_step]

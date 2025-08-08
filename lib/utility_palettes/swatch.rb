@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module UtilityPalettesRails
+module UtilityPalettes
   class Swatch
     # ? Single Colour's Palette
     # a function to create an absolute palette that incorporates a single colour input
@@ -9,15 +9,15 @@ module UtilityPalettesRails
       @increment_steppers = increment_steppers
 
       # colours are index inversely to their lightness
-      base_level = UtilityPalettesRails::Swatch.base_lightness_index(base_colour)
-      generated_absolute_swatches = {}.merge({ UtilityPalettesRails::Swatch.label(label, base_level) => base_colour })
+      base_level = UtilityPalettes::Swatch.base_lightness_index(base_colour)
+      generated_absolute_swatches = {}.merge({ UtilityPalettes::Swatch.label(label, base_level) => base_colour })
 
       # # Lighter colours
       # # calc the space available to create lightened colours based off the base colour
       # if base_level.positive?
       #   (0..base_level).each do |new_level|
-      #     new_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, new_level)
-      #     generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettesRails::Swatch.label(label, new_level) => new_colour })
+      #     new_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, new_level)
+      #     generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettes::Swatch.label(label, new_level) => new_colour })
       #   end
       # end
 
@@ -25,15 +25,15 @@ module UtilityPalettesRails
       # # calc the space available to create darkened colours based off the base colour
       # if base_level < 9
       #   (base_level..9).each do |new_level|
-      #     new_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, new_level)
-      #     generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettesRails::Swatch.label(label, new_level) => new_colour })
+      #     new_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, new_level)
+      #     generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettes::Swatch.label(label, new_level) => new_colour })
       #   end
       # end
 
       if base_level.positive?
         (0..9).each do |new_level|
-          new_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, new_level)
-          generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettesRails::Swatch.label(label, new_level) => new_colour })
+          new_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, new_level)
+          generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettes::Swatch.label(label, new_level) => new_colour })
         end
       end
 
@@ -50,23 +50,23 @@ module UtilityPalettesRails
       darker_colour = nil
 
       # colours are index inversely to their lightness
-      base_level = UtilityPalettesRails::Swatch.base_lightness_index(base_colour)
+      base_level = UtilityPalettes::Swatch.base_lightness_index(base_colour)
       generated_relative_swatches = {}.merge({ label => base_colour })
 
       # Lighter Colour
       if base_level > 1
-        lighter_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, base_level + 2)
+        lighter_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level + 2)
       elsif base_level > 0
-        lighter_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, base_level + 1)
+        lighter_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level + 1)
       else
         lighter_colour = nil
       end
 
       # Darker Colour
       if base_level < 8
-        darker_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, base_level - 2)
+        darker_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level - 2)
       elsif base_level < 9
-        darker_colour = UtilityPalettesRails::Swatch.generate(base_colour, base_level, base_level - 1)
+        darker_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level - 1)
       else
         darker_colour = nil
       end
@@ -92,11 +92,11 @@ module UtilityPalettesRails
     def self.generate(colour, base_level, new_level)
       case @method
       when 'hsl'
-        UtilityPalettesRails::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
+        UtilityPalettes::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
       when 'rgb'
         # TODO
       else
-        UtilityPalettesRails::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
+        UtilityPalettes::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
       end
     end
 
