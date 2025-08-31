@@ -93,17 +93,6 @@ If a colour is included in both the "absolutes" and "relatives" sections, then t
 
 Here you would define colour names and values that you would like copied directly to the output as you have defined them.
 
-## Pipeline
-
-Things that will hopefully be added in future development:
-
-- Finishing the overall palette spec file
-- Migrate off the reliance of Rails Generators
-- Different colour model and space methods for adapting colours, and the steps to go with them
-- Add more defaults such as different Tailwind version colours
-- Have a view that can be copied to apps to allow users the ability to quickly review the colours generated
-- Finish the '$' copy functionality to use colours defined in the config for other colours later in the generation process
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
