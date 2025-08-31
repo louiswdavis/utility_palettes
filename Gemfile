@@ -11,5 +11,5 @@ gem 'capybara'
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.0'
 
-gem 'rubocop-airbnb'
 gem 'generator_spec'
+gem 'rubocop-airbnb'
