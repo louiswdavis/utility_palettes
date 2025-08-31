@@ -10,6 +10,8 @@ A list of possible features and how they are progressing
 | Default Colours | Add more defaults such as different Tailwind version colours. Could pull from ColorSwatchCollection | 🔍 |  |
 | Viewing Colours | Have a view that can be copied to apps to allow users the ability to quickly review the colours generated | 🔍 |  |
 | '$' Function | Finish the '$' copy functionality to use colours defined in the config for other colours later in the generation process | 🔍 |  |
+| Ruby Config | Move YML to Ruby Config setup | 🔍 |  |
+|  |  | 🔍 |  |
 |  |  | 🔍 |  |
 
 ## Status Legend
