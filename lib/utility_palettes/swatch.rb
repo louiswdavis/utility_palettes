@@ -56,7 +56,7 @@ module UtilityPalettes
       # Lighter Colour
       if base_level > 1
         lighter_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level + 2)
-      elsif base_level > 0
+      elsif base_level.positive?
         lighter_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level + 1)
       else
         lighter_colour = nil
@@ -71,8 +71,8 @@ module UtilityPalettes
         darker_colour = nil
       end
 
-      generated_relative_swatches = {}.merge(generated_relative_swatches, { "#{label}-light" => lighter_colour })
-      generated_relative_swatches = {}.merge(generated_relative_swatches, { "#{label}-dark" => darker_colour })
+      generated_relative_swatches.merge({ "#{label}-light" => lighter_colour })
+      generated_relative_swatches.merge({ "#{label}-dark" => darker_colour })
 
       generated_relative_swatches
     end
