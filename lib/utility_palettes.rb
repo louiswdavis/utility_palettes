@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'json'
+require 'tempfile'
+
 require_relative 'utility_palettes/version'
 
 require_relative 'utility_palettes/configuration'
