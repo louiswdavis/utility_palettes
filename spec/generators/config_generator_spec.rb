@@ -14,6 +14,6 @@ RSpec.describe UtilityPalettes::Generators::ConfigGenerator, type: :generator do
 
   it 'creates a config template' do
     run_generator
-    assert_file 'config/utility_palettes.yml'
+    assert_file 'config/initializers/utility_palettes.rb'
   end
 end

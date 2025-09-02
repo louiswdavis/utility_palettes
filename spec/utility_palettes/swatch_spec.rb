@@ -1,13 +1,29 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe UtilityPalettes::Swatch do
   context 'methods' do
+    it '.responds_to' do
+      expect(described_class).to respond_to(:absolute_generator)
+      expect(described_class).to respond_to(:relative_generator)
+      expect(described_class).to respond_to(:base_lightness_index)
+      expect(described_class).to respond_to(:label)
+      expect(described_class).to respond_to(:generate)
+
+      expect(described_class.new).to respond_to(:build_step_check)
+    end
+
+    before do
+      @configuration = UtilityPalettes.configuration
+      @configuration.output_format = 'hsl'
+    end
+
     it '.absolute_generator' do
+      @configuration.steps_h = 3
+      @configuration.steps_s = -12
+      @configuration.steps_l = 6
+
       colour = ColorConverters::Color.new(h: 27, s: 34, l: 48)
-      increment_steppers = { h_step: 3, s_step: -12, l_step: 6 }
-      expect(described_class.absolute_generator('test', colour, 'hsl', increment_steppers)).to eq(
+      expect(described_class.absolute_generator('test', colour)).to eq(
         {
           'test-50' => ColorConverters::Color.new(h: 42.0, s: 0.0, l: 78.0),
           'test-100' => ColorConverters::Color.new(h: 39.0, s: 0.0, l: 72.0),
@@ -22,9 +38,12 @@ RSpec.describe UtilityPalettes::Swatch do
         }
       )
 
+      @configuration.steps_h = 30
+      @configuration.steps_s = -4
+      @configuration.steps_l = 11
+
       colour = ColorConverters::Color.new(h: 310, s: 29, l: 9)
-      increment_steppers = { h_step: 30, s_step: -4, l_step: 11 }
-      expect(described_class.absolute_generator('other', colour, 'hsl', increment_steppers)).to eq(
+      expect(described_class.absolute_generator('other', colour)).to eq(
         {
           'other-50' => ColorConverters::Color.new(h: 220.0, s: 0.0, l: 100.0),
           'other-100' => ColorConverters::Color.new(h: 190.0, s: 0.0, l: 97.0),
@@ -41,9 +60,12 @@ RSpec.describe UtilityPalettes::Swatch do
     end
 
     it '.relative_generator' do
+      @configuration.steps_h = 15
+      @configuration.steps_s = 22
+      @configuration.steps_l = -23
+
       colour = ColorConverters::Color.new(h: 27, s: 34, l: 48)
-      increment_steppers = { h_step: 15, s_step: 22, l_step: -23 }
-      expect(described_class.relative_generator('test', colour, 'hsl', increment_steppers)).to eq(
+      expect(described_class.relative_generator('test', colour)).to eq(
         {
           'test-dark' => ColorConverters::Color.new(h: 57.0, s: 78.0, l: 2.0),
           'test' => ColorConverters::Color.new(h: 27.0, s: 34.0, l: 48.0),
@@ -51,9 +73,12 @@ RSpec.describe UtilityPalettes::Swatch do
         }
       )
 
+      @configuration.steps_h = -30
+      @configuration.steps_s = -24
+      @configuration.steps_l = 11
+
       colour = ColorConverters::Color.new(h: 310, s: 68, l: 87)
-      increment_steppers = { h_step: -30, s_step: -24, l_step: 11 }
-      expect(described_class.relative_generator('other', colour, 'hsl', increment_steppers)).to eq(
+      expect(described_class.relative_generator('other', colour)).to eq(
         {
           'other-dark' => ColorConverters::Color.new(h: 250.0, s: 19.99, l: 100.0),
           'other' => ColorConverters::Color.new(h: 310.0, s: 68.0, l: 87.0),
@@ -79,8 +104,12 @@ RSpec.describe UtilityPalettes::Swatch do
     end
 
     it '.generate' do
+      @configuration.steps_h = -30
+      @configuration.steps_s = -24
+      @configuration.steps_l = 11
+
       colour = ColorConverters::Color.new(h: 27, s: 34, l: 48)
-      # increment_steps are based on the last time they are set in the above specs (-30, -24, 11)
+
       expect(described_class.generate(colour, 2, 4)).to eq ColorConverters::Color.new(h: 87.0, s: 82.0, l: 26.0)
       expect(described_class.generate(colour, 6, 3)).to eq ColorConverters::Color.new(h: 297.0, s: 0.0, l: 81.0)
     end

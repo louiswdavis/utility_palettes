@@ -16,4 +16,17 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:each) do
+    UtilityPalettes.reset_configuration!
+
+    UtilityPalettes.configure do |config|
+      # Enabled Environments
+      config.enable_environments = [:test]
+    end
+  end
+
+  config.after(:each) do
+    UtilityPalettes.reset_configuration!
+  end
 end
