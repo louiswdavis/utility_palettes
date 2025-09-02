@@ -10,7 +10,7 @@ A list of possible features and how they are progressing
 | Colour Methods | Different colour model and space methods for adapting colours, and the steps to go with them | 🔍 |  |
 | Default Colours | Add more defaults such as different Tailwind version colours. Could pull from ColorSwatchCollection | 🔍 |  |
 | Viewing Colours | Have a view that can be copied to apps to allow users the ability to quickly review the colours generated | 🔍 |  |
-| '$' Function | Finish the '$' copy functionality to use colours defined in the config for other colours later in the generation process | 🔍 |  |
+| '$blank' Function | Finish the '$blank' copy functionality to provide colour names | 🔍 |  |
 |  |  | 🔍 |  |
 |  |  | 🔍 |  |
 
