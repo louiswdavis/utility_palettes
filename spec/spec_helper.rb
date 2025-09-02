@@ -20,9 +20,10 @@ RSpec.configure do |config|
   config.before(:each) do
     UtilityPalettes.reset_configuration!
 
-    UtilityPalettes.configure do |config|
+    UtilityPalettes.configure do |configuration|
       # Enabled Environments
-      config.enable_environments = [:test]
+      configuration.enable_environments = [:test]
+      configuration.output_filename = 'spec/tmp/outputs/utility_palettes'
     end
   end
 

@@ -7,7 +7,7 @@ RSpec.describe UtilityPalettes::Configuration do
       expected_accessors = [
         :enable_environments,
         :use_default_absolutes, :use_default_relatives, :use_default_singles,
-        :output_dated, :output_files, :output_format, :output_prefix, :output_suffix,
+        :output_filename, :output_dated, :output_files, :output_format, :output_prefix, :output_suffix,
         :method, :steps_h, :steps_s, :steps_l, :steps_r, :steps_g, :steps_b,
         :absolutes, :relatives, :singles
       ]
@@ -16,8 +16,8 @@ RSpec.describe UtilityPalettes::Configuration do
 
       actual_accessors = configuration_class.methods.reject { |m| m.to_s.end_with?('=') }.reject { |m| m.to_s.start_with?('_') }.reject { |m| m.to_s.start_with?('!') }.select { |m| configuration_class.respond_to?("#{m}=") }
 
-      expect(actual_accessors.length).to eq 19
-      expect(expected_accessors.length).to eq 19
+      expect(actual_accessors.length).to eq 20
+      expect(expected_accessors.length).to eq 20
       expect(actual_accessors).to match_array expected_accessors
 
       expected_accessors.each do |accessor|
