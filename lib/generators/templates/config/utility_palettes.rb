@@ -10,6 +10,7 @@ UtilityPalettes.configure do |config|
   # config.default_singles = true
 
   # Output
+  # config.output_filename = 'utility_palettes'
   # config.output_dated = false
   # config.output_files = ['json']
   # config.output_format = 'hex'

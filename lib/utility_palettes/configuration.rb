@@ -4,7 +4,7 @@ module UtilityPalettes
   class Configuration
     attr_accessor :enable_environments,
                   :use_default_absolutes, :use_default_relatives, :use_default_singles,
-                  :output_dated, :output_files, :output_format, :output_prefix, :output_suffix,
+                  :output_filename, :output_dated, :output_files, :output_format, :output_prefix, :output_suffix,
                   :method, :steps_h, :steps_s, :steps_l, :steps_r, :steps_g, :steps_b,
                   :absolutes, :relatives, :singles
 
@@ -18,6 +18,7 @@ module UtilityPalettes
       @use_default_singles = true
 
       # Output
+      @output_filename = 'utility_palettes'
       @output_dated = false
       @output_files = ['json']
       @output_format = 'hex'

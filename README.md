@@ -63,13 +63,14 @@ Should the default colours be included for the palette generator. Even if they a
 
 How the output file and values should be written:
 
-| Option        | Description                                                                             | Default  | Value Type | Possible Values                                         |
-| :------------ | :-------------------------------------------------------------------------------------- | :-----:  | :--------: | :-----------------------------------------------------: |
-| ouput_dated   | Should a timestamp be included in the filenames                                         | false    | Boolean    | true / false                                            |
-| ouput_files   | The types of files the palette should be output in                                      | ['json'] | Array      | json, scss, css                                         |
-| ouput_format  | The colour syntax the output colours should be written in                               | hex      | String     | rgb, hsl, hsv, hsb, cmyk, cielab, lab, cielch, lch, hex |
-| ouput_prefix  | A string that is appended to the start of all colour names, i.e. 'tw-'                  | nil      | String     | <any string>                                            |
-| ouput_suffix  | A string that is appended to the end of all colour names, i.e. '-col'                   | nil      | String     | <any string>                                            |
+| Option           | Description                                                                             | Default             | Value Type | Possible Values                                         |
+| :------------    | :-------------------------------------------------------------------------------------- | :-----:             | :--------: | :-----------------------------------------------------: |
+| ouput_filename   | Where the file should be output to including filename, without the file extension       | 'utility_palettes'  | String     | <any filepath string>                                   |
+| ouput_dated      | Should a timestamp be included in the filenames                                         | false               | Boolean    | true / false                                            |
+| ouput_files      | The types of files the palette should be output in                                      | ['json']            | Array      | json, scss, css                                         |
+| ouput_format     | The colour syntax the output colours should be written in                               | hex                 | String     | rgb, hsl, hsv, hsb, cmyk, cielab, lab, cielch, lch, hex |
+| ouput_prefix     | A string that is appended to the start of all colour names, i.e. 'tw-'                  | nil                 | String     | <any string>                                            |
+| ouput_suffix     | A string that is appended to the end of all colour names, i.e. '-col'                   | nil                 | String     | <any string>                                            |
 
 The JSON output file will appear at the top-level of your project, while SCSS and CSS are defined to go to `app/assets/stylesheets`.
 
