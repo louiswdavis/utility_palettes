@@ -42,5 +42,7 @@ module UtilityPalettes
         'translucent' => 'rgba(0, 0, 0, 0.45)'
       }
     end
+
+    # TODO: add tailwind v4 absolutes
   end
 end

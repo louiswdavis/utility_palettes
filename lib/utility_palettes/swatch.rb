@@ -4,14 +4,14 @@ module UtilityPalettes
   class Swatch
     # ? Single Colour's Palette
     # a function to create an absolute palette that incorporates a single colour input
-    def self.absolute_generator(label, base_colour, method, increment_steppers)
-      @method = method
-      @increment_steppers = increment_steppers
+    def self.absolute_generator(label, base_colour)
+      @method = UtilityPalettes.configuration.method
 
       # colours are index inversely to their lightness
       base_level = UtilityPalettes::Swatch.base_lightness_index(base_colour)
-      generated_absolute_swatches = {}.merge({ UtilityPalettes::Swatch.label(label, base_level) => base_colour })
+      generated_absolute_swatches = { UtilityPalettes::Swatch.label(label, base_level) => base_colour }
 
+      # TODO: remove once confident the lower loop is equivalent to these
       # # Lighter colours
       # # calc the space available to create lightened colours based off the base colour
       # if base_level.positive?
@@ -33,7 +33,7 @@ module UtilityPalettes
       if base_level.positive?
         (0..9).each do |new_level|
           new_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, new_level)
-          generated_absolute_swatches = {}.merge(generated_absolute_swatches, { UtilityPalettes::Swatch.label(label, new_level) => new_colour })
+          generated_absolute_swatches.merge!({ UtilityPalettes::Swatch.label(label, new_level) => new_colour })
         end
       end
 
@@ -42,16 +42,15 @@ module UtilityPalettes
 
     # ? Single Colour's Relative Palette
     # a function to create a relative palette centred on a single colour input
-    def self.relative_generator(label, base_colour, method, increment_steppers)
-      @method = method
-      @increment_steppers = increment_steppers
+    def self.relative_generator(label, base_colour)
+      @method = UtilityPalettes.configuration.method
 
       lighter_colour = nil
       darker_colour = nil
 
       # colours are index inversely to their lightness
       base_level = UtilityPalettes::Swatch.base_lightness_index(base_colour)
-      generated_relative_swatches = {}.merge({ label => base_colour })
+      generated_relative_swatches = { label => base_colour }
 
       # Lighter Colour
       if base_level > 1
@@ -71,8 +70,8 @@ module UtilityPalettes
         darker_colour = nil
       end
 
-      generated_relative_swatches.merge({ "#{label}-light" => lighter_colour })
-      generated_relative_swatches.merge({ "#{label}-dark" => darker_colour })
+      generated_relative_swatches.merge!({ "#{label}-light" => lighter_colour })
+      generated_relative_swatches.merge!({ "#{label}-dark" => darker_colour })
 
       generated_relative_swatches
     end
@@ -92,11 +91,11 @@ module UtilityPalettes
     def self.generate(colour, base_level, new_level)
       case @method
       when 'hsl'
-        UtilityPalettes::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
+        UtilityPalettes::Sequences.hsl(colour, new_level - base_level)
       when 'rgb'
         # TODO
       else
-        UtilityPalettes::Sequences.hsl(colour, new_level - base_level, @increment_steppers)
+        UtilityPalettes::Sequences.hsl(colour, new_level - base_level)
       end
     end
 
