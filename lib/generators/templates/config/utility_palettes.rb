@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 UtilityPalettes.configure do |config|
   # Enabled Environments
   # config.enable_environments = [:development]
@@ -9,10 +11,10 @@ UtilityPalettes.configure do |config|
 
   # Output
   # config.output_dated = false
-  # config.output_files = ['json', 'scss', 'css']
+  # config.output_files = ['json']
   # config.output_format = 'hex'
-  # config.output_prefix = ''
-  # config.output_suffix = ''
+  # config.output_prefix = nil
+  # config.output_suffix = nil
 
   # Method
   # config.method = 'hsl'

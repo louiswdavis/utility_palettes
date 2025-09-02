@@ -52,7 +52,7 @@ RSpec.describe UtilityPalettes::Configuration do
       expect(configuration.use_default_singles).to eq true
 
       expect(configuration.output_dated).to eq false
-      expect(configuration.output_files).to eq []
+      expect(configuration.output_files).to eq ['json']
       expect(configuration.output_format).to eq 'hex'
       expect(configuration.output_prefix).to eq ''
       expect(configuration.output_suffix).to eq ''

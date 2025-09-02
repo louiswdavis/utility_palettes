@@ -50,7 +50,7 @@ module UtilityPalettes
       output_files = configuration.output_files.map(&:strip)
 
       file = nil
-      file = UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.blank? || output_files.include?('json')
+      file = UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.include?('json')
       File.rename(file.path, "#{filename}.json") if file.present?
 
       file = nil
@@ -71,7 +71,7 @@ module UtilityPalettes
 
       basic_hash.each do |label, colour|
         begin
-          if colour.start_with?('$')
+          if colour.is_a?(String) && colour.start_with?('$')
             # if the colour label begins with $ then it is a reference to a different defined colour, so must be looked up in the main
             colourized_hash[label] = ColorConverters::Color.new(@combined_samples.dig(colour.slice(1..-1).to_sym))
           else

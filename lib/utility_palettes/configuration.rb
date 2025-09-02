@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UtilityPalettes
   class Configuration
     attr_accessor :enable_environments,
@@ -17,7 +19,7 @@ module UtilityPalettes
 
       # Output
       @output_dated = false
-      @output_files = []
+      @output_files = ['json']
       @output_format = 'hex'
       @output_prefix = ''
       @output_suffix = ''

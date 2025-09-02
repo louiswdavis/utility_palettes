@@ -67,7 +67,7 @@ How the output file and values should be written:
 | :------------ | :-------------------------------------------------------------------------------------- | :-----:  | :--------: | :-----------------------------------------------------: |
 | ouput_dated   | Should a timestamp be included in the filenames                                         | false    | Boolean    | true / false                                            |
 | ouput_files   | The types of files the palette should be output in                                      | ['json'] | Array      | json, scss, css                                         |
-| ouput_format  | The colour syntax the output colours should be written in                               | rgb      | String     | rgb, hsl, hsv, hsb, cmyk, cielab, lab, cielch, lch, hex |
+| ouput_format  | The colour syntax the output colours should be written in                               | hex      | String     | rgb, hsl, hsv, hsb, cmyk, cielab, lab, cielch, lch, hex |
 | ouput_prefix  | A string that is appended to the start of all colour names, i.e. 'tw-'                  | nil      | String     | <any string>                                            |
 | ouput_suffix  | A string that is appended to the end of all colour names, i.e. '-col'                   | nil      | String     | <any string>                                            |
 
@@ -90,8 +90,8 @@ In the future you will be able to shift the colours by changing values for diffe
 | Option  | Description                          | Default | Possible Values |
 | :------ | :----------------------------------: | :-----: | :-------------: |
 | steps_h | How much to adjust the hue by        | 0       | 0 - 100         |
-| steps_s | How much to adjust the saturation by | 2       | 0 - 100         |
-| steps_l | How much to adjust the lightness by  | 9       | 0 - 100         |
+| steps_s | How much to adjust the saturation by | 3       | 0 - 100         |
+| steps_l | How much to adjust the lightness by  | 8       | 0 - 100         |
 
 ### Colours
 
