@@ -6,7 +6,7 @@ module UtilityPalettes
       source_root File.expand_path('../../..', __dir__)
 
       def copy_config
-        copy_file 'lib/generators/templates/config/utility_palettes.yml', 'config/utility_palettes.yml'
+        copy_file 'lib/generators/templates/config/utility_palettes.rb', 'config/initializers/utility_palettes.rb'
       end
     end
   end

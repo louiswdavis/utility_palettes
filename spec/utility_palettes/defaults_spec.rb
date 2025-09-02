@@ -4,7 +4,13 @@ require 'spec_helper'
 
 RSpec.describe UtilityPalettes::Defaults do
   context 'methods' do
-    it 'absolutes' do
+    it '.responds_to' do
+      expect(described_class).to respond_to(:absolutes)
+      expect(described_class).to respond_to(:relatives)
+      expect(described_class).to respond_to(:singles)
+    end
+
+    it '.absolutes' do
       expect(described_class.absolutes).to eq(
         {
           'red' => 'hsl(2, 78%, 64%)',
@@ -30,7 +36,7 @@ RSpec.describe UtilityPalettes::Defaults do
       )
     end
 
-    it 'relatives' do
+    it '.relatives' do
       expect(described_class.relatives).to eq(
         {
           'success' => 'hsl(110, 69%, 58%)',
@@ -41,7 +47,7 @@ RSpec.describe UtilityPalettes::Defaults do
       )
     end
 
-    it 'singles' do
+    it '.singles' do
       expect(described_class.singles).to eq(
         {
           'white' => '#fff',

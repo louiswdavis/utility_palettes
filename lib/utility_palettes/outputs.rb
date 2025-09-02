@@ -2,8 +2,8 @@
 
 module UtilityPalettes
   class Outputs
-    def self.generate(generated_palettes, config)
-      output_format = config.dig(:output, :format).to_s.downcase.presence
+    def self.generate(generated_palettes)
+      output_format = UtilityPalettes.configuration.output_format.to_s.downcase.presence
       output_palettes = {}
 
       generated_palettes.each do |label, colourize_colour|

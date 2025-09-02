@@ -4,31 +4,25 @@ module UtilityPalettes
   module Generators
     class GenerateGenerator < Rails::Generators::Base
       def generate_utility_palettes
-        config = {}
+        self.class.config_format_warn if File.exist?('config/utility_palettes.yml') || File.exist?('config/utility_palettes.json')
 
-        if File.exist?('config/utility_palettes.yml') && defined?(Rails.application.config_for)
-          config = Rails.application.config_for(:utility_palettes).dig('utility_palettes')
-        elsif File.exist?('config/utility_palettes.json')
-          config = JSON.parse(File.read('config/utility_palettes.json')).dig(Rails.env.to_s, 'utility_palettes')
-        end
-
-        if !config.is_a?(Hash)
-          self.class.config_format_warn
-        elsif config.dig('disabled') == true
-          self.class.disabled_warn
+        if UtilityPalettes.configuration.enable_environments.include?(Rails.env.to_sym)
+          UtilityPalettes::Palettes.generate
         else
-          UtilityPalettes::Palettes.generate(config)
+          self.class.disabled_warn
         end
       end
 
       private
 
+      # TODO: add links to README for migration
       def self.config_format_warn
-        warn 'ERROR: Utility Palettes config is not formatted as a hash for the "utility_palettes" value'
+        warn 'WARNING: Utility Palettes now uses an initializer to set config. You need to migrate and remove your YML/JSON file.'
       end
 
+      # TODO: add links to README for environment setting
       def self.disabled_warn
-        warn 'ERROR: Utility Palettes is disabled for this environment'
+        warn 'ERROR: Utility Palettes is disabled for this environment. Palettes will not be generated.'
       end
     end
   end

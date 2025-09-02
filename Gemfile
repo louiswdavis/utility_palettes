@@ -13,3 +13,8 @@ gem 'rspec', '~> 3.0'
 
 gem 'generator_spec'
 gem 'rubocop-airbnb'
+
+# will no longer be part of the default ruby gems starting from Ruby 3.5.0
+gem 'irb', '~> 1.15'
+gem 'ostruct'
+gem 'rdoc', '~> 6.7'

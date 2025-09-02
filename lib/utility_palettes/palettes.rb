@@ -2,25 +2,20 @@
 
 module UtilityPalettes
   class Palettes
-    def self.generate(config)
-      @config = config
+    def self.generate
+      configuration = UtilityPalettes.configuration
 
       puts 'Generating utility palettes...'
 
-      UtilityPalettes::Validations.validate_config(@config)
-      @increment_steppers = UtilityPalettes::Configuration.setup(@config)
-
-      puts 'Retrieved configuration...'
-
-      default_absolutes = @config.dig(:defaults, :absolutes) == false ? {} : UtilityPalettes::Defaults.absolutes
-      default_relatives = @config.dig(:defaults, :relatives) == false ? {} : UtilityPalettes::Defaults.relatives
-      default_singles = @config.dig(:defaults, :singles) == false ? {} : UtilityPalettes::Defaults.singles
+      default_absolutes = configuration.use_default_absolutes == true ? UtilityPalettes::Defaults.absolutes : {}
+      default_relatives = configuration.use_default_relatives == true ? UtilityPalettes::Defaults.relatives : {}
+      default_singles = configuration.use_default_singles == true ? UtilityPalettes::Defaults.singles : {}
 
       puts 'Defined default palettes...'
 
-      user_absolutes = @config.dig(:absolutes) || {}
-      user_relatives = @config.dig(:relatives) || {}
-      user_singles = @config.dig(:singles) || {}
+      user_absolutes = configuration.absolutes
+      user_relatives = configuration.relatives
+      user_singles = configuration.singles
 
       puts 'Retrieved user palettes...'
 
@@ -47,17 +42,17 @@ module UtilityPalettes
 
       generated_palettes = {}.merge(generated_absolutes, generated_relatives, generated_singles)
       generated_palettes = self.format_palette(generated_palettes)
-      output_palettes = UtilityPalettes::Outputs.generate(generated_palettes, @config)
+      output_palettes = UtilityPalettes::Outputs.generate(generated_palettes)
 
       filename = 'utility_palettes'
-      filename += "-#{Time.zone.now.strftime('%Y%m%d-%H%M%S')}" if @config.dig(:output, :dated) == true
+      filename += "-#{Time.zone.now.strftime('%Y%m%d-%H%M%S')}" if configuration.output_dated == true
 
-      output_files = (@config.dig(:output, :files) || '').split(',').map(&:strip)
+      output_files = configuration.output_files.map(&:strip)
 
       file = nil
-      file = UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.blank? || output_files.include?('json')
+      file = UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.include?('json')
       File.rename(file.path, "#{filename}.json") if file.present?
-      
+
       file = nil
       file = UtilityPalettes::Outputs.scss(filename, output_palettes) if output_files.include?('scss')
       File.rename(file.path, "app/assets/stylesheets/#{filename}.scss") if file.present?
@@ -71,14 +66,14 @@ module UtilityPalettes
 
     private
 
-    def self.colourize_values(colour_hash)
+    def self.colourize_values(basic_hash)
       colourized_hash = {}
 
-      colour_hash.each do |label, colour|
+      basic_hash.each do |label, colour|
         begin
-          if colour.start_with?('$')
+          if colour.is_a?(String) && colour.start_with?('$')
             # if the colour label begins with $ then it is a reference to a different defined colour, so must be looked up in the main
-            colourized_hash[label] = ColorConverters::Color.new(@combined_samples.dig(colour[1..].to_sym))
+            colourized_hash[label] = ColorConverters::Color.new(@combined_samples.dig(colour.slice(1..-1).to_sym))
           else
             colourized_hash[label] = ColorConverters::Color.new(colour)
           end
@@ -102,32 +97,32 @@ module UtilityPalettes
     # ? Multiple Colour's Palette
     # a function to loop through a map of colours and create absolute or relative palettes for them all and collect this into a single map
 
-    def self.palette_looper(colour_map, method)
+    def self.palette_looper(colourized_hash, palette_type)
       looped_generated_palettes = {}
 
-      colour_map.each do |label, base_colour|
+      colourized_hash.each do |label, base_colour|
         # create a palette for a single colour from the providing mapping
-        if method == 'absolutes'
-          generated_swatches = UtilityPalettes::Swatch.absolute_generator(label, base_colour, @config.dig(:method), @increment_steppers)
-        elsif method == 'relatives'
-          generated_swatches = UtilityPalettes::Swatch.relative_generator(label, base_colour, @config.dig(:method), @increment_steppers)
+        if palette_type == 'absolutes'
+          generated_swatches = UtilityPalettes::Swatch.absolute_generator(label, base_colour)
+        elsif palette_type == 'relatives'
+          generated_swatches = UtilityPalettes::Swatch.relative_generator(label, base_colour)
         end
 
         # merge the colours absolute palette into the collective mapping
-        looped_generated_palettes = {}.merge(looped_generated_palettes, generated_swatches)
+        looped_generated_palettes.merge!(generated_swatches)
       end
 
       looped_generated_palettes
     end
 
-    def self.format_palette(palettes)
-      palettes.compact_blank!
+    def self.format_palette(generated_hash)
+      configuration = UtilityPalettes.configuration
 
-      palettes.transform_keys!(&:to_s)
-      palettes.transform_keys! { |key| @config.dig(:output, :prefix) + key } if @config.dig(:output, :prefix).present?
-      palettes.transform_keys! { |key| key + @config.dig(:output, :suffix) } if @config.dig(:output, :suffix).present?
+      generated_hash.transform_keys!(&:to_s)
+      generated_hash.transform_keys! { |key| configuration.output_prefix + key } if configuration.output_prefix.present?
+      generated_hash.transform_keys! { |key| key + configuration.output_suffix } if configuration.output_suffix.present?
 
-      palettes
+      generated_hash
     end
   end
 end
