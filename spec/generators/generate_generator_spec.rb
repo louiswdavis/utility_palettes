@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'generator_spec' # For testing Rails generators
 require 'rails'          # To mock Rails environment components
 require 'ostruct'        # For mocking Rails.application
 
@@ -33,7 +32,10 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
     expect(described_class).not_to have_received(:disabled_warn)
     expect(described_class).not_to have_received(:config_format_warn)
 
-    # assert_file 'utility_palettes.json'
+    # assert_file and File.exist? don't work for some reason
+    expect(File.file?(File.join(destination_root, 'outputs/utility_palettes.json'))).to be true
+    expect(File.file?(File.join(destination_root, 'outputs/utility_palettes.scss'))).to be true
+    expect(File.file?(File.join(destination_root, 'outputs/utility_palettes.css'))).to be true
   end
 
   it 'and loads config and disables generate' do

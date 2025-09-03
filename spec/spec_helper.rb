@@ -4,6 +4,8 @@ require 'utility_palettes'
 require 'color_converters'
 require 'byebug'
 
+require 'generator_spec'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 RSpec.configure do |config|

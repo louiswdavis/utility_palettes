@@ -63,7 +63,7 @@ module UtilityPalettes
 
       # Create directory if it doesn't exist
       FileUtils.mkdir_p(File.dirname(filepath))
-      file = File.write(filepath, content)
+      File.write(filepath, content)
 
       puts 'Exporting utility palettes JSON...'
       true
@@ -75,7 +75,7 @@ module UtilityPalettes
 
       # Create directory if it doesn't exist
       FileUtils.mkdir_p(File.dirname(filepath))
-      file = File.write(filepath, content)
+      File.write(filepath, content)
 
       puts 'Exporting utility palettes SCSS...'
       true
@@ -87,7 +87,7 @@ module UtilityPalettes
 
       # Create directory if it doesn't exist
       FileUtils.mkdir_p(File.dirname(filepath))
-      file = File.write(filepath, content)
+      File.write(filepath, content)
 
       puts 'Exporting utility palettes CSS...'
       true
