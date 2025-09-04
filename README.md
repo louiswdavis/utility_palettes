@@ -1,5 +1,8 @@
 # UtilityPalettes
 
+![Static Badge](https://img.shields.io/badge/Gem_Version-1.0.0-blue)
+[![Static Badge](https://img.shields.io/badge/RubyGems-red)](https://rubygems.org/gems/utility_palettes)
+
 > Generate your own colour palettes in an instance.
 
 Utility Palettes is an ruby gem package for use in ruby or other projects that generates palettes and shades based on supplied colours.
@@ -22,13 +25,13 @@ gem install utility_palettes
 
 ## Usage
 
-To get the config full of
+To get the config file:
 
 ```bash
 rails generate utility_palettes:config
 ```
 
-to generate the palettes
+To generate the palettes:
 
 ```bash
 rails generate utility_palettes:generate
@@ -63,6 +66,7 @@ Should the default colours be included for the palette generator. Even if they a
 
 How the output file and values should be written:
 
+<<<<<<< Updated upstream
 | Option        | Description                                                                             | Default  | Value Type | Possible Values                                         |
 | :------------ | :-------------------------------------------------------------------------------------- | :-----:  | :--------: | :-----------------------------------------------------: |
 | ouput_dated   | Should a timestamp be included in the filenames                                         | false    | Boolean    | true / false                                            |
@@ -72,6 +76,16 @@ How the output file and values should be written:
 | ouput_suffix  | A string that is appended to the end of all colour names, i.e. '-col'                   | nil      | String     | <any string>                                            |
 
 The JSON output file will appear at the top-level of your project, while SCSS and CSS are defined to go to `app/assets/stylesheets`.
+=======
+| Option         | Description                                                                       | Default            | Value Type | Possible Values                                         |
+| :------------  | :-------------------------------------------------------------------------------- | :----------------: | :--------: | :-----------------------------------------------------: |
+| ouput_filename | Where the file should be output to including filename, without the file extension | 'utility_palettes' | String     | <any filepath string>                                   |
+| ouput_dated    | Should a timestamp be included in the filenames                                   | false              | Boolean    | true / false                                            |
+| ouput_files    | The types of files the palette should be output in                                | ['json']           | Array      | json, scss, css                                         |
+| ouput_format   | The colour syntax the output colours should be written in                         | hex                | String     | rgb, hsl, hsv, hsb, cmyk, cielab, lab, cielch, lch, hex |
+| ouput_prefix   | A string that is appended to the start of all colour names, i.e. 'tw-'            | nil                | String     | <any string>                                            |
+| ouput_suffix   | A string that is appended to the end of all colour names, i.e. '-col'             | nil                | String     | <any string>                                            |
+>>>>>>> Stashed changes
 
 ### Method (WIP)
 
