@@ -12,7 +12,7 @@ UtilityPalettes.configure do |config|
   # Output
   # config.output_filename = 'utility_palettes'
   # config.output_dated = false
-  # config.output_files = ['json']
+  # config.output_files = ['scss']
   # config.output_format = 'hex'
   # config.output_prefix = nil
   # config.output_suffix = nil

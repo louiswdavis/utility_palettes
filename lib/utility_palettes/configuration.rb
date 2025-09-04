@@ -20,7 +20,7 @@ module UtilityPalettes
       # Output
       @output_filename = 'utility_palettes'
       @output_dated = false
-      @output_files = ['json']
+      @output_files = ['scss']
       @output_format = 'hex'
       @output_prefix = ''
       @output_suffix = ''

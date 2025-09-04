@@ -47,8 +47,8 @@ RSpec.describe UtilityPalettes::Palettes do
       expect(UtilityPalettes::Sequences).to have_received(:rgb).exactly(0).times
 
       expect(UtilityPalettes::Outputs).to have_received(:generate).exactly(1).times
-      expect(UtilityPalettes::Outputs).to have_received(:json).exactly(1).times
-      expect(UtilityPalettes::Outputs).to have_received(:scss).exactly(0).times
+      expect(UtilityPalettes::Outputs).to have_received(:json).exactly(0).times
+      expect(UtilityPalettes::Outputs).to have_received(:scss).exactly(1).times
       expect(UtilityPalettes::Outputs).to have_received(:css).exactly(0).times
     end
   end
