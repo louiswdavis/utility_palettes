@@ -134,10 +134,23 @@ RSpec.describe UtilityPalettes::Palettes do
     it '.format_palette' do
       configuration = UtilityPalettes.configuration
 
-      expect(described_class.format_palette(@generated_hash)).to match_array @generated_hash
+      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      expect(described_class.format_palette(generated_hash)).to match_array(
+        {
+          'colour-a-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-a' => ColorConverters::Color.new('#123456'),
+          'colour-a-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-b-light' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
+          'colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
+          'colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+        }
+      )
 
+      # prefix
       configuration.output_prefix = 'basic+'
-      expect(described_class.format_palette(@generated_hash)).to eq(
+
+      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      expect(described_class.format_palette(generated_hash)).to eq(
         {
           'basic+colour-a-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
           'basic+colour-a' => ColorConverters::Color.new('#123456'),
@@ -148,29 +161,33 @@ RSpec.describe UtilityPalettes::Palettes do
         }
       )
 
-      # the .format_palette method is destructive so adjusts the used variable
+      # prefix and suffix
       configuration.output_suffix = '--paint'
-      expect(described_class.format_palette(@generated_hash)).to eq(
+
+      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      expect(described_class.format_palette(generated_hash)).to eq(
         {
-          'basic+basic+colour-a-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
-          'basic+basic+colour-a--paint' => ColorConverters::Color.new('#123456'),
-          'basic+basic+colour-a-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
-          'basic+basic+colour-b-light--paint' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
-          'basic+basic+colour-b--paint' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-          'basic+basic+colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+          'basic+colour-a-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'basic+colour-a--paint' => ColorConverters::Color.new('#123456'),
+          'basic+colour-a-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'basic+colour-b-light--paint' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
+          'basic+colour-b--paint' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
+          'basic+colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
         }
       )
 
-      # the .format_palette method is destructive so adjusts the used variable
+      # suffix
       configuration.output_prefix = nil
-      expect(described_class.format_palette(@generated_hash)).to eq(
+
+      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      expect(described_class.format_palette(generated_hash)).to eq(
         {
-          'basic+basic+colour-a-light--paint--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
-          'basic+basic+colour-a--paint--paint' => ColorConverters::Color.new('#123456'),
-          'basic+basic+colour-a-dark--paint--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
-          'basic+basic+colour-b-light--paint--paint' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
-          'basic+basic+colour-b--paint--paint' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-          'basic+basic+colour-b-dark--paint--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+          'colour-a-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-a--paint' => ColorConverters::Color.new('#123456'),
+          'colour-a-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-b-light--paint' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
+          'colour-b--paint' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
+          'colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
         }
       )
     end

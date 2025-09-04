@@ -12,7 +12,10 @@ RSpec.describe UtilityPalettes::Configuration do
         :absolutes, :relatives, :singles
       ]
 
+      expected_defaults = [[:development], true, true, true, 'utility_palettes', false, ['scss'], 'hex', '', '', 'hsl', 0, 3, 8, 9, 9, 9, {}, {}, {}]
+
       configuration_class = UtilityPalettes::Configuration.new
+      configuration = described_class.new
 
       actual_accessors = configuration_class.methods.reject { |m| m.to_s.end_with?('=') }.reject { |m| m.to_s.start_with?('_') }.reject { |m| m.to_s.start_with?('!') }.select { |m| configuration_class.respond_to?("#{m}=") }
 
@@ -20,9 +23,11 @@ RSpec.describe UtilityPalettes::Configuration do
       expect(expected_accessors.length).to eq 20
       expect(actual_accessors).to match_array expected_accessors
 
-      expected_accessors.each do |accessor|
+      expected_accessors.each_with_index do |accessor, index|
         expect(configuration_class).to respond_to(accessor)
         expect(configuration_class).to respond_to("#{accessor}=")
+
+        expect(configuration.send(accessor)).to eq expected_defaults[index]
       end
     end
 
@@ -40,32 +45,6 @@ RSpec.describe UtilityPalettes::Configuration do
 
       expect(UtilityPalettes).to respond_to(:configuration)
       expect(UtilityPalettes).to respond_to(:reset_configuration!)
-    end
-
-    it '.initialize' do
-      configuration = described_class.new
-
-      expect(configuration.enable_environments).to eq([:development])
-
-      expect(configuration.use_default_absolutes).to eq true
-      expect(configuration.use_default_relatives).to eq true
-      expect(configuration.use_default_singles).to eq true
-
-      expect(configuration.output_dated).to eq false
-      expect(configuration.output_files).to eq ['scss']
-      expect(configuration.output_format).to eq 'hex'
-      expect(configuration.output_prefix).to eq ''
-      expect(configuration.output_suffix).to eq ''
-
-      expect(configuration.method).to eq 'hsl'
-
-      expect(configuration.steps_h).to eq 0
-      expect(configuration.steps_s).to eq 3
-      expect(configuration.steps_l).to eq 8
-
-      expect(configuration.absolutes).to eq({})
-      expect(configuration.relatives).to eq({})
-      expect(configuration.singles).to eq({})
     end
 
     it '.reset!' do
