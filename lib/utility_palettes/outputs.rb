@@ -53,40 +53,44 @@ module UtilityPalettes
         end
       end
 
-      output_palettes
+      # TODO: sort by non-ASCII so that -50 is before -100 -> `naturally` gem
+      output_palettes.sort.to_h
     end
 
     def self.json(filename, output_palettes)
-      file = Tempfile.new([filename, '.json'])
+      content = JSON.pretty_generate(output_palettes)
+      filepath = "#{filename}.json"
 
-      File.open(file, 'w') do |f|
-        f.write(JSON.pretty_generate(output_palettes))
-      end
+      # Create directory if it doesn't exist
+      FileUtils.mkdir_p(File.dirname(filepath))
+      File.write(filepath, content)
 
       puts 'Exporting utility palettes JSON...'
-      file
+      true
     end
 
     def self.scss(filename, output_palettes)
-      file = Tempfile.new([filename, '.scss'])
+      content = output_palettes.collect { |label, hex| "$#{label}: #{hex};" }.join("\n")
+      filepath = "#{filename}.scss"
 
-      File.open(file, 'w') do |f|
-        f.write(output_palettes.collect { |label, hex| "$#{label}: #{hex};" }.join("\n"))
-      end
+      # Create directory if it doesn't exist
+      FileUtils.mkdir_p(File.dirname(filepath))
+      File.write(filepath, content)
 
       puts 'Exporting utility palettes SCSS...'
-      file
+      true
     end
 
     def self.css(filename, output_palettes)
-      file = Tempfile.new([filename, '.css'])
+      content = ":root {\n\t#{output_palettes.collect { |label, hex| "--#{label}: #{hex};" }.join("\n\t")}\n}"
+      filepath = "#{filename}.css"
 
-      File.open(file, 'w') do |f|
-        f.write(":root {\n\t#{output_palettes.collect { |label, hex| "--#{label}: #{hex};" }.join("\n\t")}\n}")
-      end
+      # Create directory if it doesn't exist
+      FileUtils.mkdir_p(File.dirname(filepath))
+      File.write(filepath, content)
 
       puts 'Exporting utility palettes CSS...'
-      file
+      true
     end
 
     def bespoke_property_variables

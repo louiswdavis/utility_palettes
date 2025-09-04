@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'generator_spec' # For testing Rails generators
 require 'rails'          # To mock Rails environment components
 require 'ostruct'        # For mocking Rails.application
 
@@ -18,24 +17,30 @@ RSpec.describe UtilityPalettes::Generators::GenerateGenerator, type: :generator 
     allow(File).to receive(:exist?).with('config/utility_palettes.json').and_return(false)
 
     # Stub the actual generation call so we don't try to run it
-    allow(UtilityPalettes::Palettes).to receive(:generate)
+    allow(UtilityPalettes::Palettes).to receive(:generate).and_call_original
     allow(described_class).to receive(:disabled_warn).and_call_original
     allow(described_class).to receive(:config_format_warn).and_call_original
   end
 
   it 'and loads config and calls generate' do
+    configuration = UtilityPalettes.configuration
+    configuration.output_files = ['json', 'scss', 'css']
+
     run_generator
 
     expect(UtilityPalettes::Palettes).to have_received(:generate).once
     expect(described_class).not_to have_received(:disabled_warn)
     expect(described_class).not_to have_received(:config_format_warn)
+
+    # assert_file and File.exist? don't work for some reason
+    expect(File.file?(File.join(destination_root, 'outputs/utility_palettes.json'))).to be true
+    expect(File.file?(File.join(destination_root, 'outputs/utility_palettes.scss'))).to be true
+    expect(File.file?(File.join(destination_root, 'outputs/utility_palettes.css'))).to be true
   end
 
   it 'and loads config and disables generate' do
-    UtilityPalettes.configure do |config|
-      # Enabled Environments
-      config.enable_environments = []
-    end
+    configuration = UtilityPalettes.configuration
+    configuration.enable_environments = []
 
     run_generator
 

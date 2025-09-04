@@ -4,6 +4,8 @@ require 'utility_palettes'
 require 'color_converters'
 require 'byebug'
 
+require 'generator_spec'
+
 ENV['RAILS_ENV'] ||= 'test'
 
 RSpec.configure do |config|
@@ -20,9 +22,10 @@ RSpec.configure do |config|
   config.before(:each) do
     UtilityPalettes.reset_configuration!
 
-    UtilityPalettes.configure do |config|
+    UtilityPalettes.configure do |configuration|
       # Enabled Environments
-      config.enable_environments = [:test]
+      configuration.enable_environments = [:test]
+      configuration.output_filename = 'spec/tmp/outputs/utility_palettes'
     end
   end
 

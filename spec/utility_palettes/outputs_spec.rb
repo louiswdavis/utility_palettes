@@ -51,26 +51,41 @@ RSpec.describe UtilityPalettes::Outputs do
     end
 
     it '.json' do
-      file = described_class.json('test-json', @output_palettes)
-      open_file = JSON.parse(file.read)
-      expect(open_file.length).to eq 2
-      expect(open_file).to eq @output_palettes
+      filepath = 'spec/tmp/outputs/test-json'
+      result = described_class.json(filepath, @output_palettes)
+
+      expect(result).to eq true
+      expect(File.exist?("#{filepath}.json")).to be true
+      file_content = JSON.parse(File.read("#{filepath}.json"))
+
+      expect(file_content.length).to eq 2
+      expect(file_content).to eq @output_palettes
     end
 
     it '.scss' do
-      file = described_class.scss('test-scss', @output_palettes)
-      open_file = file.read.split("\n")
-      expect(open_file.length).to eq 2
-      expect(open_file).to eq ['$colour-50: #123456;', '$colour-100: #654321;']
+      filepath = 'spec/tmp/outputs/test-scss'
+      result = described_class.scss(filepath, @output_palettes)
+
+      expect(result).to eq true
+      expect(File.exist?("#{filepath}.scss")).to be true
+      file_content = File.read("#{filepath}.scss").split("\n")
+
+      expect(file_content.length).to eq 2
+      expect(file_content).to eq(['$colour-50: #123456;', '$colour-100: #654321;'])
     end
 
     it '.css' do
-      file = described_class.css('test-css', @output_palettes)
-      open_file = file.read.gsub("\t", '').split("\n")
-      expect(open_file.length).to eq 4
-      expect(open_file.first).to eq ':root {'
-      expect(open_file[1..2]).to eq ['--colour-50: #123456;', '--colour-100: #654321;']
-      expect(open_file.last).to eq '}'
+      filepath = 'spec/tmp/outputs/test-css'
+      result = described_class.css(filepath, @output_palettes)
+
+      expect(result).to eq true
+      expect(File.exist?("#{filepath}.css")).to be true
+      file_content = File.read("#{filepath}.css").gsub("\t", '').split("\n")
+
+      expect(file_content.length).to eq 4
+      expect(file_content[0]).to eq ':root {'
+      expect(file_content[1..2]).to eq ['--colour-50: #123456;', '--colour-100: #654321;']
+      expect(file_content[3]).to eq '}'
     end
   end
 

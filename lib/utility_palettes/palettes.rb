@@ -44,22 +44,14 @@ module UtilityPalettes
       generated_palettes = self.format_palette(generated_palettes)
       output_palettes = UtilityPalettes::Outputs.generate(generated_palettes)
 
-      filename = 'utility_palettes'
+      filename = configuration.output_filename
       filename += "-#{Time.zone.now.strftime('%Y%m%d-%H%M%S')}" if configuration.output_dated == true
 
       output_files = configuration.output_files.map(&:strip)
 
-      file = nil
-      file = UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.include?('json')
-      File.rename(file.path, "#{filename}.json") if file.present?
-
-      file = nil
-      file = UtilityPalettes::Outputs.scss(filename, output_palettes) if output_files.include?('scss')
-      File.rename(file.path, "app/assets/stylesheets/#{filename}.scss") if file.present?
-
-      file = nil
-      file = UtilityPalettes::Outputs.css(filename, output_palettes) if output_files.include?('css')
-      File.rename(file.path, "app/assets/stylesheets/#{filename}.css") if file.present?
+      UtilityPalettes::Outputs.json(filename, output_palettes) if output_files.include?('json')
+      UtilityPalettes::Outputs.scss(filename, output_palettes) if output_files.include?('scss')
+      UtilityPalettes::Outputs.css(filename, output_palettes) if output_files.include?('css')
 
       true
     end
