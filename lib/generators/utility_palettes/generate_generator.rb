@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+begin
+  require 'rails/generators'
+  require 'rails/generators/base'
+rescue LoadError => e
+  raise LoadError, "railties gem is required for generators. Add 'railties' to your Gemfile: #{e.message}"
+end
+
 module UtilityPalettes
   module Generators
     class GenerateGenerator < Rails::Generators::Base
