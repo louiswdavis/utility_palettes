@@ -89,7 +89,7 @@ RSpec.describe UtilityPalettes::Palettes do
     it '.colourize_values' do
       expect(described_class.colourize_values(@palette_hash)).to match_array @colorize_hash
 
-      infinite_loop_hash = { 'colour-a' => '$colour-b', 'colour-b' => '$colour-d', 'colour-c' => '$colour-d', 'colour-d' => '$colour-a' }
+      infinite_loop_hash = { 'colour-a' => '$colour-b', 'colour-b' => '$colour-d', 'colour-c' => '$colour-e', 'colour-d' => '$colour-a' }
       UtilityPalettes::Palettes.instance_variable_set(:@combined_samples, infinite_loop_hash)
       expect(described_class.colourize_values(infinite_loop_hash)).to eq({})
       expect { described_class.colourize_values(infinite_loop_hash) }.to output(/Circular reference detected/).to_stderr
