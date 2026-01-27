@@ -64,8 +64,16 @@ module UtilityPalettes
       basic_hash.each do |label, colour|
         begin
           if colour.is_a?(String) && colour.start_with?('$')
-            # if the colour label begins with $ then it is a reference to a different defined colour, so must be looked up in the main
-            colourized_hash[label] = ColorConverters::Color.new(@combined_samples.dig(colour.slice(1..-1).to_sym))
+            colour_ref_array = [colour]
+
+            # if the colour label begins with $ then it is a reference to a different defined colour, so must be looked up in the main hash
+            while colour_ref_array.last.is_a?(String) && colour_ref_array.last.start_with?('$') do
+              colour_ref = @combined_samples.dig(colour_ref_array.last.slice(1..-1))
+              raise UtilityPalettes::Error, "Circular reference detected for colour '#{label}': #{colour_ref_array.join(' -> ')}" if colour_ref_array.include?(colour_ref)
+              colour_ref_array << colour_ref
+            end
+
+            colourized_hash[label] = ColorConverters::Color.new(colour_ref)
           else
             colourized_hash[label] = ColorConverters::Color.new(colour)
           end
@@ -76,6 +84,8 @@ module UtilityPalettes
           #   hash[colourized_hash[label].name] = hash.delete(label)
           #   puts "Blank colour #{colour} has been given the name: #{colourized_hash[label].name}"
           # end
+        rescue UtilityPalettes::Error => e
+          warn "Error processing colour #{label}: #{e.message}"
         rescue ColorConverters::InvalidColorError => e
           warn "Error processing colour #{label} with value #{colour}: #{e.message}"
         end

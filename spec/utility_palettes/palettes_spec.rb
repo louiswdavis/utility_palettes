@@ -61,20 +61,38 @@ RSpec.describe UtilityPalettes::Palettes do
     end
 
     before do
-      @palette_hash = { 'colour-a' => '#123456', 'colour-b' => { h: 30.0, s: 50.75, l: 26.27 } }
-      @colorize_hash = { 'colour-a' => ColorConverters::Color.new('#123456'), 'colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27) }
-      @generated_hash = {
+      @palette_hash = { 'colour-a' => '#123456', 'colour-b' => { h: 30.0, s: 50.75, l: 26.27 }, 'colour-c' => '$colour-d', 'colour-d' => '$colour-a' }
+      @colorize_hash = {
+        'colour-a' => ColorConverters::Color.new('#123456'),
+        'colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
+        'colour-c' => ColorConverters::Color.new('#123456'),
+        'colour-d' => ColorConverters::Color.new('#123456'),
+      }
+      @generated_relative_hash = {
         'colour-a-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
         'colour-a' => ColorConverters::Color.new('#123456'),
         'colour-a-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
         'colour-b-light' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
         'colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-        'colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+        'colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27),
+        'colour-c-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+        'colour-c' => ColorConverters::Color.new('#123456'),
+        'colour-c-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+        'colour-d-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+        'colour-d' => ColorConverters::Color.new('#123456'),
+        'colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
       }
+
+      UtilityPalettes::Palettes.instance_variable_set(:@combined_samples, @palette_hash)
     end
 
     it '.colourize_values' do
       expect(described_class.colourize_values(@palette_hash)).to match_array @colorize_hash
+
+      infinite_loop_hash = { 'colour-a' => '$colour-b', 'colour-b' => '$colour-d', 'colour-c' => '$colour-d', 'colour-d' => '$colour-a' }
+      UtilityPalettes::Palettes.instance_variable_set(:@combined_samples, infinite_loop_hash)
+      expect(described_class.colourize_values(infinite_loop_hash)).to eq({})
+      expect { described_class.colourize_values(infinite_loop_hash) }.to output(/Circular reference detected/).to_stderr
     end
 
     it '.palette_looper' do
@@ -100,41 +118,39 @@ RSpec.describe UtilityPalettes::Palettes do
           'colour-b-600' => ColorConverters::Color.new(h: 30.0, s: 53.75, l: 34.27),
           'colour-b-700' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
           'colour-b-800' => ColorConverters::Color.new(h: 30.0, s: 47.75, l: 18.27),
-          'colour-b-900' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27)
+          'colour-b-900' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
+
+          'colour-c-50' => ColorConverters::Color.new(h: 210.0, s: 86.38, l: 76.39),
+          'colour-c-100' => ColorConverters::Color.new(h: 210.0, s: 83.38, l: 68.39),
+          'colour-c-200' => ColorConverters::Color.new(h: 210.0, s: 80.38, l: 60.39),
+          'colour-c-300' => ColorConverters::Color.new(h: 210.0, s: 77.38, l: 52.39),
+          'colour-c-400' => ColorConverters::Color.new(h: 210.0, s: 74.38, l: 44.39),
+          'colour-c-500' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-c-600' => ColorConverters::Color.new(h: 210.0, s: 68.38, l: 28.39),
+          'colour-c-700' => ColorConverters::Color.new(h: 210.0, s: 65.38, l: 20.39),
+          'colour-c-800' => ColorConverters::Color.new(h: 210.0, s: 62.38, l: 12.39),
+          'colour-c-900' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+
+          'colour-d-50' => ColorConverters::Color.new(h: 210.0, s: 86.38, l: 76.39),
+          'colour-d-100' => ColorConverters::Color.new(h: 210.0, s: 83.38, l: 68.39),
+          'colour-d-200' => ColorConverters::Color.new(h: 210.0, s: 80.38, l: 60.39),
+          'colour-d-300' => ColorConverters::Color.new(h: 210.0, s: 77.38, l: 52.39),
+          'colour-d-400' => ColorConverters::Color.new(h: 210.0, s: 74.38, l: 44.39),
+          'colour-d-500' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-d-600' => ColorConverters::Color.new(h: 210.0, s: 68.38, l: 28.39),
+          'colour-d-700' => ColorConverters::Color.new(h: 210.0, s: 65.38, l: 20.39),
+          'colour-d-800' => ColorConverters::Color.new(h: 210.0, s: 62.38, l: 12.39),
+          'colour-d-900' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
         }
       )
 
-      {
-        'colour-a-50' => ColorConverters::Color.new(h: 210.0, s: 86.38, l: 76.39),
-        'colour-a-100' => ColorConverters::Color.new(h: 210.0, s: 83.38, l: 68.39),
-        'colour-a-200' => ColorConverters::Color.new(h: 210.0, s: 80.38, l: 60.39),
-        'colour-a-300' => ColorConverters::Color.new(h: 210.0, s: 77.38, l: 52.39),
-        'colour-a-400' => ColorConverters::Color.new(h: 210.0, s: 74.38, l: 44.39),
-        'colour-a-500' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
-        'colour-a-600' => ColorConverters::Color.new(h: 210.0, s: 68.38, l: 28.39),
-        'colour-a-700' => ColorConverters::Color.new(h: 210.0, s: 65.38, l: 20.39),
-        'colour-a-800' => ColorConverters::Color.new(h: 210.0, s: 62.38, l: 12.39),
-        'colour-a-900' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
-
-        'colour-b-50' => ColorConverters::Color.new(h: 30.0, s: 71.75, l: 82.27),
-        'colour-b-100' => ColorConverters::Color.new(h: 30.0, s: 68.75, l: 74.27),
-        'colour-b-200' => ColorConverters::Color.new(h: 30.0, s: 65.75, l: 66.27),
-        'colour-b-300' => ColorConverters::Color.new(h: 30.0, s: 62.75, l: 58.27),
-        'colour-b-400' => ColorConverters::Color.new(h: 30.0, s: 59.75, l: 50.27),
-        'colour-b-500' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27),
-        'colour-b-600' => ColorConverters::Color.new(h: 30.0, s: 53.75, l: 34.27),
-        'colour-b-700' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-        'colour-b-800' => ColorConverters::Color.new(h: 30.0, s: 47.75, l: 18.27),
-        'colour-b-900' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27)
-      }
-
-      expect(described_class.palette_looper(@colorize_hash, 'relatives')).to match_array @generated_hash
+      expect(described_class.palette_looper(@colorize_hash, 'relatives')).to match_array @generated_relative_hash
     end
 
     it '.format_palette' do
       configuration = UtilityPalettes.configuration
 
-      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      generated_hash = @generated_relative_hash.dup # create a copy rather than just another assignment
       expect(described_class.format_palette(generated_hash)).to match_array(
         {
           'colour-a-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
@@ -142,14 +158,20 @@ RSpec.describe UtilityPalettes::Palettes do
           'colour-a-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'colour-b-light' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
           'colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-          'colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+          'colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27),
+          'colour-c-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-c' => ColorConverters::Color.new('#123456'),
+          'colour-c-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-d-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-d' => ColorConverters::Color.new('#123456'),
+          'colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
         }
       )
 
       # prefix
       configuration.output_prefix = 'basic+'
 
-      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      generated_hash = @generated_relative_hash.dup # create a copy rather than just another assignment
       expect(described_class.format_palette(generated_hash)).to eq(
         {
           'basic+colour-a-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
@@ -157,14 +179,20 @@ RSpec.describe UtilityPalettes::Palettes do
           'basic+colour-a-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'basic+colour-b-light' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
           'basic+colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-          'basic+colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+          'basic+colour-b-dark' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27),
+          'basic+colour-c-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'basic+colour-c' => ColorConverters::Color.new('#123456'),
+          'basic+colour-c-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'basic+colour-d-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'basic+colour-d' => ColorConverters::Color.new('#123456'),
+          'basic+colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
         }
       )
 
       # prefix and suffix
       configuration.output_suffix = '--paint'
 
-      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      generated_hash = @generated_relative_hash.dup # create a copy rather than just another assignment
       expect(described_class.format_palette(generated_hash)).to eq(
         {
           'basic+colour-a-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
@@ -172,14 +200,20 @@ RSpec.describe UtilityPalettes::Palettes do
           'basic+colour-a-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'basic+colour-b-light--paint' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
           'basic+colour-b--paint' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-          'basic+colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+          'basic+colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27),
+          'basic+colour-c-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'basic+colour-c--paint' => ColorConverters::Color.new('#123456'),
+          'basic+colour-c-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'basic+colour-d-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'basic+colour-d--paint' => ColorConverters::Color.new('#123456'),
+          'basic+colour-d-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
         }
       )
 
       # suffix
       configuration.output_prefix = nil
 
-      generated_hash = @generated_hash.dup # create a copy rather than just another assignment
+      generated_hash = @generated_relative_hash.dup # create a copy rather than just another assignment
       expect(described_class.format_palette(generated_hash)).to eq(
         {
           'colour-a-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
@@ -187,7 +221,13 @@ RSpec.describe UtilityPalettes::Palettes do
           'colour-a-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'colour-b-light--paint' => ColorConverters::Color.new(h: 30.0, s: 44.75, l: 10.27),
           'colour-b--paint' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
-          'colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27)
+          'colour-b-dark--paint' => ColorConverters::Color.new(h: 30.0, s: 56.75, l: 42.27),
+          'colour-c-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-c--paint' => ColorConverters::Color.new('#123456'),
+          'colour-c-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-d-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-d--paint' => ColorConverters::Color.new('#123456'),
+          'colour-d-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
         }
       )
     end
