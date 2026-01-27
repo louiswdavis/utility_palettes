@@ -67,9 +67,10 @@ module UtilityPalettes
             colour_ref_array = [colour]
 
             # if the colour label begins with $ then it is a reference to a different defined colour, so must be looked up in the main hash
-            while colour_ref_array.last.is_a?(String) && colour_ref_array.last.start_with?('$') do
+            while colour_ref_array.last.is_a?(String) && colour_ref_array.last.start_with?('$')
               colour_ref = @combined_samples.dig(colour_ref_array.last.slice(1..-1))
               raise UtilityPalettes::Error, "Circular reference detected for colour '#{label}': #{colour_ref_array.join(' -> ')}" if colour_ref_array.include?(colour_ref)
+
               colour_ref_array << colour_ref
             end
 

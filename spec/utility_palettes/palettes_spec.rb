@@ -66,7 +66,7 @@ RSpec.describe UtilityPalettes::Palettes do
         'colour-a' => ColorConverters::Color.new('#123456'),
         'colour-b' => ColorConverters::Color.new(h: 30.0, s: 50.75, l: 26.27),
         'colour-c' => ColorConverters::Color.new('#123456'),
-        'colour-d' => ColorConverters::Color.new('#123456'),
+        'colour-d' => ColorConverters::Color.new('#123456')
       }
       @generated_relative_hash = {
         'colour-a-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
@@ -80,7 +80,7 @@ RSpec.describe UtilityPalettes::Palettes do
         'colour-c-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
         'colour-d-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
         'colour-d' => ColorConverters::Color.new('#123456'),
-        'colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+        'colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39)
       }
 
       UtilityPalettes::Palettes.instance_variable_set(:@combined_samples, @palette_hash)
@@ -140,7 +140,7 @@ RSpec.describe UtilityPalettes::Palettes do
           'colour-d-600' => ColorConverters::Color.new(h: 210.0, s: 68.38, l: 28.39),
           'colour-d-700' => ColorConverters::Color.new(h: 210.0, s: 65.38, l: 20.39),
           'colour-d-800' => ColorConverters::Color.new(h: 210.0, s: 62.38, l: 12.39),
-          'colour-d-900' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
+          'colour-d-900' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39)
         }
       )
 
@@ -164,7 +164,7 @@ RSpec.describe UtilityPalettes::Palettes do
           'colour-c-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'colour-d-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
           'colour-d' => ColorConverters::Color.new('#123456'),
-          'colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39)
         }
       )
 
@@ -185,7 +185,7 @@ RSpec.describe UtilityPalettes::Palettes do
           'basic+colour-c-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'basic+colour-d-light' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
           'basic+colour-d' => ColorConverters::Color.new('#123456'),
-          'basic+colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'basic+colour-d-dark' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39)
         }
       )
 
@@ -206,7 +206,7 @@ RSpec.describe UtilityPalettes::Palettes do
           'basic+colour-c-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'basic+colour-d-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
           'basic+colour-d--paint' => ColorConverters::Color.new('#123456'),
-          'basic+colour-d-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'basic+colour-d-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39)
         }
       )
 
@@ -227,7 +227,7 @@ RSpec.describe UtilityPalettes::Palettes do
           'colour-c-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
           'colour-d-light--paint' => ColorConverters::Color.new(h: 210.0, s: 59.38, l: 4.39),
           'colour-d--paint' => ColorConverters::Color.new('#123456'),
-          'colour-d-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39),
+          'colour-d-dark--paint' => ColorConverters::Color.new(h: 210.0, s: 71.38, l: 36.39)
         }
       )
     end
