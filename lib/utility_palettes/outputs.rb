@@ -65,7 +65,7 @@ module UtilityPalettes
       FileUtils.mkdir_p(File.dirname(filepath))
       File.write(filepath, content)
 
-      puts 'Exporting utility palettes JSON...'
+      puts "Exporting utility palettes JSON to #{filepath}..."
       true
     end
 
@@ -77,7 +77,7 @@ module UtilityPalettes
       FileUtils.mkdir_p(File.dirname(filepath))
       File.write(filepath, content)
 
-      puts 'Exporting utility palettes SCSS...'
+      puts "Exporting utility palettes SCSS to #{filepath}..."
       true
     end
 
@@ -89,7 +89,7 @@ module UtilityPalettes
       FileUtils.mkdir_p(File.dirname(filepath))
       File.write(filepath, content)
 
-      puts 'Exporting utility palettes CSS...'
+      puts "Exporting utility palettes CSS to #{filepath}..."
       true
     end
 
