@@ -1,6 +1,6 @@
 # UtilityPalettes
 
-![Static Badge](https://img.shields.io/badge/Gem_Version-1.0.5-blue)
+![Static Badge](https://img.shields.io/badge/Gem_Version-1.0.6-blue)
 [![Static Badge](https://img.shields.io/badge/RubyGems-red)](https://rubygems.org/gems/utility_palettes)
 
 > Generate your own colour palettes in an instance.
