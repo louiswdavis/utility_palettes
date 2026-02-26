@@ -30,7 +30,7 @@ module UtilityPalettes
       #   end
       # end
 
-      if base_level.positive?
+      unless base_level.negative?
         (0..9).each do |new_level|
           new_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, new_level)
           generated_absolute_swatches.merge!({ UtilityPalettes::Swatch.label(label, new_level) => new_colour })
