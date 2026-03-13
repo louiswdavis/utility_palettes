@@ -38,7 +38,6 @@ Gem::Specification.new do |spec|
   end
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
   spec.add_dependency 'color_converters', '~> 0.1.2'
   spec.add_dependency 'railties', '>= 4.0'
 

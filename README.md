@@ -1,6 +1,6 @@
 # UtilityPalettes
 
-![Static Badge](https://img.shields.io/badge/Gem_Version-1.0.4-blue)
+![Static Badge](https://img.shields.io/badge/Gem_Version-1.0.7-blue)
 [![Static Badge](https://img.shields.io/badge/RubyGems-red)](https://rubygems.org/gems/utility_palettes)
 
 > Generate your own colour palettes in an instance.
@@ -111,7 +111,8 @@ The value can be;
 
 - a string such as '#ff0000' or 'rgb(51, 102, 204)',
 - a hash of colour space keys and values such as { r: 51, g: 102, b: 204 } or { h: 30, s: 50, l: 75 },
-- a 'reference' to a colour the is previously defined be using that colour name as the value but prepended with '$', such as '$red' (this felt useful if there are colours if you re-use the same colours under different use names)
+- a 'reference' to a colour the is also defined in one of your config be using that colour name as the value but prepended with '$', such as '$red' (this felt useful if there are colours if you re-use the same colours under different use names)
+ - currently you can only reference colours defined in the config, not colours that would be generated as part of the palette generator process
 
 | Option    | Default | Possible Values                       |
 | :-------- | :-----: | :-----------------------------------: |

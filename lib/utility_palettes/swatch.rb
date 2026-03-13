@@ -30,7 +30,7 @@ module UtilityPalettes
       #   end
       # end
 
-      if base_level.positive?
+      unless base_level.negative?
         (0..9).each do |new_level|
           new_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, new_level)
           generated_absolute_swatches.merge!({ UtilityPalettes::Swatch.label(label, new_level) => new_colour })
@@ -58,7 +58,7 @@ module UtilityPalettes
       elsif base_level.positive?
         lighter_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level + 1)
       else
-        lighter_colour = nil
+        lighter_colour = base_colour # TODO: should this be differently? but needs to return something for output loop
       end
 
       # Darker Colour
@@ -67,7 +67,7 @@ module UtilityPalettes
       elsif base_level < 9
         darker_colour = UtilityPalettes::Swatch.generate(base_colour, base_level, base_level - 1)
       else
-        darker_colour = nil
+        darker_colour = base_colour # TODO: should this be differently? but needs to return something for output loop
       end
 
       generated_relative_swatches.merge!({ "#{label}-light" => lighter_colour })

@@ -57,6 +57,22 @@ RSpec.describe UtilityPalettes::Swatch do
           'other-900' => ColorConverters::Color.new(h: 310.0, s: 29.02, l: 9.0)
         }
       )
+
+      colour = ColorConverters::Color.new('#f8fafc')
+      expect(described_class.absolute_generator('other', colour)).to eq(
+        {
+          'other-50' => ColorConverters::Color.new('#f8fafc'),
+          'other-100' => ColorConverters::Color.new(h: 180.0, s: 44.0, l: 87.04),
+          'other-200' => ColorConverters::Color.new(h: 150.0, s: 48.0, l: 76.04),
+          'other-300' => ColorConverters::Color.new(h: 120.0, s: 52.0, l: 65.04),
+          'other-400' => ColorConverters::Color.new(h: 90.0, s: 56.0, l: 54.04),
+          'other-500' => ColorConverters::Color.new(h: 60.0, s: 60.0, l: 43.04),
+          'other-600' => ColorConverters::Color.new(h: 30.0, s: 64.0, l: 32.04),
+          'other-700' => ColorConverters::Color.new(h: 0.0, s: 68.0, l: 21.04),
+          'other-800' => ColorConverters::Color.new(h: 330.0, s: 72.0, l: 10.04),
+          'other-900' => ColorConverters::Color.new(h: 300.0, s: 76.0, l: 0.0)
+        }
+      )
     end
 
     it '.relative_generator' do
@@ -83,6 +99,28 @@ RSpec.describe UtilityPalettes::Swatch do
           'other-dark' => ColorConverters::Color.new(h: 250.0, s: 19.99, l: 100.0),
           'other' => ColorConverters::Color.new(h: 310.0, s: 68.0, l: 87.0),
           'other-light' => ColorConverters::Color.new(h: 340.0, s: 91.99, l: 76.0)
+        }
+      )
+
+      @configuration.steps_h = -300
+      @configuration.steps_s = -204
+      @configuration.steps_l = 200
+
+      colour = ColorConverters::Color.new(h: 310, s: 68, l: 87)
+      expect(described_class.relative_generator('other', colour)).to eq(
+        {
+          'other-dark' => ColorConverters::Color.new(h: 250.0, s: 19.99, l: 100.0),
+          'other' => ColorConverters::Color.new(h: 310.0, s: 68.0, l: 87.0),
+          'other-light' => ColorConverters::Color.new(h: 340.0, s: 91.99, l: 0.0)
+        }
+      )
+
+      colour = ColorConverters::Color.new('#f8fafc')
+      expect(described_class.relative_generator('other', colour)).to eq(
+        {
+          'other-dark' => ColorConverters::Color.new(h: 150.0, s: 0.0, l: 100.0),
+          'other' => ColorConverters::Color.new('#f8fafc'),
+          'other-light' => ColorConverters::Color.new('#f8fafc')
         }
       )
     end

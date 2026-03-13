@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    utility_palettes (1.0.4)
+    utility_palettes (1.0.7)
       color_converters (~> 0.1.2)
       railties (>= 4.0)
 
