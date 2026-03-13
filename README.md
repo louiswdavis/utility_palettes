@@ -8,6 +8,7 @@
 Utility Palettes is an ruby gem package for use in ruby or other projects that generates palettes and shades based on supplied colours.
 Take a single colour and generate a full tailwind-style set of "absolute" shades ranging from -50 to -900 where the given colour is inserted into the range where it suits best.
 Or generate "relative" shades that have the supplied colour at it's core and add a -light and -dark shade.
+All output to file(s) of your configured format, listing them out with each new shade and it's new colour value.
 
 ## Installation
 
